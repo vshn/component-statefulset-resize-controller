@@ -1,0 +1,4 @@
+parameters:
+  statefulset_resize_controller:
+    =_metadata: {}
+    namespace: syn-statefulset-resize-controller

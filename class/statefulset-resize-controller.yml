@@ -1,0 +1,11 @@
+parameters:
+  kapitan:
+    compile:
+      - input_paths:
+          - statefulset-resize-controller/component/app.jsonnet
+        input_type: jsonnet
+        output_path: apps/
+      - input_paths:
+          - statefulset-resize-controller/component/main.jsonnet
+        input_type: jsonnet
+        output_path: statefulset-resize-controller/

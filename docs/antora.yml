@@ -1,0 +1,6 @@
+name: statefulset-resize-controller
+title: statefulset-resize-controller
+version: master
+start_page: ROOT:index.adoc
+nav:
+  - modules/ROOT/partials/nav.adoc

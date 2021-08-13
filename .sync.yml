@@ -1,0 +1,7 @@
+:global:
+  componentName: statefulset-resize-controller
+  githubUrl: https://github.com/vshn/component-statefulset-resize-controller
+
+docs/antora.yml:
+  name: statefulset-resize-controller
+  title: statefulset-resize-controller
