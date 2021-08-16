@@ -2,3 +2,14 @@ parameters:
   statefulset_resize_controller:
     =_metadata: {}
     namespace: syn-statefulset-resize-controller
+    images:
+      operator:
+        registry: quay.io
+        repository: vshn/statefulset-resize-controller
+        version: v0.1.0
+      rsync:
+        registry: quay.io
+        repository: instrumentisto/rsync-ssh
+        version: alpine3.14
+    manifest_version: ${statefulset_resize_controller:images:operator:version}
+    manifest_url: https://raw.githubusercontent.com/vshn/statefulset-resize-controller/${statefulset_resize_controller:manifest_version}/config
