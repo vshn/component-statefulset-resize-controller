@@ -15,7 +15,7 @@ The namespace in which to deploy this component.
 
 [horizontal]
 type:: dictionary
-default:: 
+default::
 +
 [source,yaml]
 ----
