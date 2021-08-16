@@ -1,4 +1,0 @@
-parameters:
-  statefulset_resize_controller:
-    manifest_version: config-improvements
-
