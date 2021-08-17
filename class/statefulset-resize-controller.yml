@@ -1,5 +1,18 @@
 parameters:
   kapitan:
+    dependencies:
+      - type: https
+        source: ${statefulset_resize_controller:manifest_url}/manager/manager.yaml
+        output_path: dependencies/statefulset-resize-controller/manifests/operator/${statefulset_resize_controller:manifest_version}/deployment.yaml
+      - type: https
+        source: ${statefulset_resize_controller:manifest_url}/rbac/role.yaml
+        output_path: dependencies/statefulset-resize-controller/manifests/operator/${statefulset_resize_controller:manifest_version}/role.yaml
+      - type: https
+        source: ${statefulset_resize_controller:manifest_url}/rbac/role_binding.yaml
+        output_path: dependencies/statefulset-resize-controller/manifests/operator/${statefulset_resize_controller:manifest_version}/role_binding.yaml
+      - type: https
+        source: ${statefulset_resize_controller:manifest_url}/rbac/service_account.yaml
+        output_path: dependencies/statefulset-resize-controller/manifests/operator/${statefulset_resize_controller:manifest_version}/service_account.yaml
     compile:
       - input_paths:
           - statefulset-resize-controller/component/app.jsonnet

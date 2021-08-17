@@ -11,9 +11,22 @@ default:: `syn-statefulset-resize-controller`
 The namespace in which to deploy this component.
 
 
-== Example
+== `images`
 
+[horizontal]
+type:: dictionary
+default::
++
 [source,yaml]
 ----
-namespace: example-namespace
+operator:
+  registry: quay.io
+  repository: vshn/statefulset-resize-controller
+  version: v0.1.1
+rsync:
+  registry: quay.io
+  repository: instrumentisto/rsync-ssh
+  version: alpine3.14
 ----
+
+Dictionary containing the container images used by this component.
