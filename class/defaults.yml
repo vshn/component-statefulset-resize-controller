@@ -6,7 +6,7 @@ parameters:
       operator:
         registry: quay.io
         repository: vshn/statefulset-resize-controller
-        version: v0.1.1
+        version: v0.1.2
       rsync:
         registry: quay.io
         repository: instrumentisto/rsync-ssh
