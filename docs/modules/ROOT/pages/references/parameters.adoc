@@ -22,11 +22,12 @@ default::
 operator:
   registry: quay.io
   repository: vshn/statefulset-resize-controller
-  version: v0.1.1
+  version: v0.2.0 <1>
 rsync:
   registry: quay.io
   repository: instrumentisto/rsync-ssh
   version: alpine3.14
 ----
+<1> The version of the `statefulset-resize-controller` image is also used to fetch the matching deployment manifests.
 
 Dictionary containing the container images used by this component.
