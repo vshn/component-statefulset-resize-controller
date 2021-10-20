@@ -16,6 +16,13 @@ local deployment = std.parseJson(kap.yaml_load('statefulset-resize-controller/ma
 local image = params.images.operator.registry + '/' + params.images.operator.repository + ':' + params.images.operator.version;
 local syncImage = params.images.rsync.registry + '/' + params.images.rsync.repository + ':' + params.images.rsync.version;
 
+local controller_args = [
+  '--sync-image',
+  syncImage,
+  '--sync-cluster-role',
+  params.sync_cluster_role,
+];
+
 local objects = [
 
   role {
@@ -52,10 +59,7 @@ local objects = [
             if c.name == 'manager' then
               c {
                 image: image,
-                args: [
-                  '--sync-image',
-                  syncImage,
-                ],
+                args: controller_args,
               }
             else
               c

@@ -39,8 +39,9 @@ func Test_OperatorDeployment(t *testing.T) {
 
 	assert.Equal(t, operatorImage, c.Image)
 
-	require.Len(t, c.Args, 2)
+	require.Len(t, c.Args, 4)
 	assert.Equal(t, rsyncImage, c.Args[1])
+	assert.Equal(t, "", c.Args[3])
 
 	assert.Equal(t, saName, deploy.Spec.Template.Spec.ServiceAccountName)
 }

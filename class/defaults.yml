@@ -11,5 +11,6 @@ parameters:
         registry: quay.io
         repository: instrumentisto/rsync-ssh
         version: alpine3.14
+    sync_cluster_role: ""
     manifest_version: ${statefulset_resize_controller:images:operator:version}
     manifest_url: https://raw.githubusercontent.com/vshn/statefulset-resize-controller/${statefulset_resize_controller:manifest_version}/config
