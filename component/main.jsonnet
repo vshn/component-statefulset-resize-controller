@@ -8,7 +8,13 @@ local params = inv.parameters.statefulset_resize_controller;
 local prefix = 'statefulset-resize-';
 
 local role = std.parseJson(kap.yaml_load('statefulset-resize-controller/manifests/operator/' + params.manifest_version + '/role.yaml'));
-local service_account = std.parseJson(kap.yaml_load('statefulset-resize-controller/manifests/operator/' + params.manifest_version + '/service_account.yaml'));
+local service_account = std.parseJson(
+  kap.yaml_load('statefulset-resize-controller/manifests/operator/' + params.manifest_version + '/service_account.yaml')
+) {
+  metadata+: {
+    name: prefix + super.name,
+  },
+};
 local role_binding = std.parseJson(kap.yaml_load('statefulset-resize-controller/manifests/operator/' + params.manifest_version + '/role_binding.yaml'));
 local deployment = std.parseJson(kap.yaml_load('statefulset-resize-controller/manifests/operator/' + params.manifest_version + '/deployment.yaml'));
 
@@ -22,6 +28,23 @@ local controller_args = [
   '--sync-cluster-role',
   params.sync_cluster_role,
 ];
+
+local sync_cluster_role_clusterrolebinding =
+  if params.sync_cluster_role != '' then
+    kube.ClusterRoleBinding(service_account.metadata.name + '-sync-cluster-role') {
+      roleRef: {
+        apiGroup: 'rbac.authorization.k8s.io',
+        kind: 'ClusterRole',
+        name: params.sync_cluster_role,
+      },
+      subjects: [
+        {
+          kind: 'ServiceAccount',
+          name: service_account.metadata.name,
+          namespace: params.namespace,
+        },
+      ],
+    };
 
 local objects = [
 
@@ -42,11 +65,8 @@ local objects = [
       namespace: params.namespace,
     }, super.subjects),
   },
-  service_account {
-    metadata+: {
-      name: prefix + super.name,
-    },
-  },
+  sync_cluster_role_clusterrolebinding,
+  service_account,
   deployment {
     metadata+: {
       name: prefix + super.name,
@@ -75,11 +95,22 @@ local objects = [
   '00_namespace': kube.Namespace(params.namespace),
 }
 +
-{
-  ['10_' + std.asciiLower(obj.kind)]: obj {
-    metadata+: {
-      namespace: params.namespace,
-    },
-  }
-  for obj in objects
-}
+std.foldl(
+  function(obj, it) obj + it,
+  [
+    {
+      ['10_' + std.asciiLower(obj.kind)]+: [
+        obj {
+          metadata+: {
+            namespace: params.namespace,
+          },
+        },
+      ],
+    }
+    for obj in std.filter(
+      function(it) it != null,
+      objects
+    )
+  ],
+  {}
+)
