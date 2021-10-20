@@ -22,7 +22,7 @@ default::
 operator:
   registry: quay.io
   repository: vshn/statefulset-resize-controller
-  version: v0.2.0 <1>
+  version: v0.2.1 <1>
 rsync:
   registry: quay.io
   repository: instrumentisto/rsync-ssh
