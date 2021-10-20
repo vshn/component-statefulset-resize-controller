@@ -31,3 +31,17 @@ rsync:
 <1> The version of the `statefulset-resize-controller` image is also used to fetch the matching deployment manifests.
 
 Dictionary containing the container images used by this component.
+
+== `sync_cluster_role`
+
+[horizontal]
+type:: string
+default:: `""`
+
+This parameter can be used to configure a ClusterRole (by name) which the sync jobs can use.
+The ClusterRole must exist on the cluster.
+The component doesn't offer support to deploy an additional ClusterRole.
+
+If the parameter is the empty string, no additional ClusterRole is configured for the sync jobs.
+
+For example, this parameter can be used to allow the sync jobs to use a non-default PodSecurityPolicy, by specifying a ClusterRole which allows using that PodSecurityPolicy.
