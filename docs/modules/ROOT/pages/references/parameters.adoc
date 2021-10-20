@@ -42,6 +42,9 @@ This parameter can be used to configure a ClusterRole (by name) which the sync j
 The ClusterRole must exist on the cluster.
 The component doesn't offer support to deploy an additional ClusterRole.
 
+Additionally, the component creates a `ClusterRoleBinding` to the provided ClusterRole for the statefulset-resize-controller.
+This ensures that the controller can create RoleBindings for the provided ClusterRole.
+
 If the parameter is the empty string, no additional ClusterRole is configured for the sync jobs.
 
 For example, this parameter can be used to allow the sync jobs to use a non-default PodSecurityPolicy, by specifying a ClusterRole which allows using that PodSecurityPolicy.
