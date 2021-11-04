@@ -43,6 +43,9 @@ func Test_OperatorDeployment(t *testing.T) {
 	assert.Equal(t, rsyncImage, c.Args[1])
 	assert.Equal(t, "", c.Args[3])
 
+	assert.Equal(t, "20Mi", c.Resources.Requests.Memory().String())
+	assert.Equal(t, "300Mi", c.Resources.Limits.Memory().String())
+
 	assert.Equal(t, saName, deploy.Spec.Template.Spec.ServiceAccountName)
 }
 

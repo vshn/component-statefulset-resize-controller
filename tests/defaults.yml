@@ -1,3 +1,6 @@
-# Overwrite parameters here
-
-# parameters: {...}
+parameters:
+  statefulset_resize_controller:
+    operator:
+      resources:
+        limits:
+          memory: 300Mi
