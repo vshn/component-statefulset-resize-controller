@@ -80,6 +80,7 @@ local objects = [
               c {
                 image: image,
                 args: controller_args,
+                resources+: params.operator.resources,
               }
             else
               c
