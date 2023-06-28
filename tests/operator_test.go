@@ -15,7 +15,7 @@ import (
 
 var (
 	operator      = "statefulset-resize-controller-manager"
-	operatorImage = "quay.io/vshn/statefulset-resize-controller:v0.2.1"
+	operatorImage = "quay.io/vshn/statefulset-resize-controller:v0.2.2"
 	rsyncImage    = "quay.io/instrumentisto/rsync-ssh:alpine3.14"
 
 	roleName        = "statefulset-resize-controller-manager"
